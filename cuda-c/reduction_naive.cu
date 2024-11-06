@@ -8,6 +8,9 @@
 #define WIDTH 2048                          // Define the vector width
 #define N_BLOCKS  256                       // Define the number of blocks
 #define THREADS_PER_BLOCK WIDTH/N_BLOCKS/2  // Define the number of threads in a block
+// obs: here we are using just 4 threads per block -> underutilization of the resources!
+// in jetson nano there is just 1 block with 128 cuda cores
+// the optimal number of threads per block is > 128 to hide latency of accessing memory
 
 inline cudaError_t checkCuda(cudaError_t result) {
   if (result != cudaSuccess) {
